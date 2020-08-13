@@ -1,3 +1,4 @@
+import 'package:checkin/screens/history_page.dart';
 import 'package:checkin/utility/my_style.dart';
 import 'package:checkin/utility/signout_process.dart';
 import 'package:checkin/widget/check_in_page.dart';
@@ -53,6 +54,7 @@ class _MainUserState extends State<MainUser> {
               children: <Widget>[
                 showHead(),
                 menuCheckin(),
+                historyCheckin(),
               ],
             ),
             Column(
@@ -64,6 +66,27 @@ class _MainUserState extends State<MainUser> {
           ],
         ),
       );
+  ListTile historyCheckin() {
+    return ListTile(
+      onTap: () {
+        //routeToService(HistoryPage());
+        Navigator.pop(context);
+        setState(() {
+          currentWidget = HistoryPage();
+        });
+      },
+      leading: Icon(Icons.alarm_on),
+      title: Text('History Check in'),
+      subtitle: Text('History สถานที่ วัน เวลา'),
+    );
+  }
+
+  void routeToService(Widget myWidget) {
+    MaterialPageRoute route = MaterialPageRoute(
+      builder: (context) => myWidget,
+    );
+    Navigator.pushAndRemoveUntil(context, route, (route) => false);
+  }
 
   ListTile menuCheckin() {
     return ListTile(
